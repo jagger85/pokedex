@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <section id="featured-items"> 
+        <div class="items">
+        <header>Featured Items</header>
+        <div class="item">
+            <div class="box"><p>Featured 1</p></div>
+            <div class="item-title">Featured Item 1</div>
+            <div class="price">Php 100.00</div>
+            <input type="text" class="quantity" value="1"/>
+            <div><input type="button" value="Add to Cart"/></div>
+        </div>
+        <div class="item">
+            <div class="box">Featured 2</div>
+            <div class="item-title">Featured Item 2</div>
+            <div class="price">Php 100.00</div>
+            <input type="text" class="quantity" value="2"/>
+            <div><input type="button" value="Add to Cart"/></div>
+        </div>
+        <div class="item">
+            <div class="box"><p>Featured 3</p></div>
+            <div class="item-title">Featured Item 3</div>
+            <div class="price">Php 100.00</div>
+            <input type="text" class="quantity" value="3"/>
+            <div><input type="button" value="Add to Cart"/></div>
+        </div>
+        </div>
+    </section>
+
+    <section id="cart">
+        <header> My Cart </header>
+        <table class="my-cart">
+            <tr>
+                <th>Image</th>
+                <th>Product Description</th>
+                <th>Quantity</th>
+                <th>Price</th>
+                <th>Total</th>
+            </tr>
+            <tr>
+                <td class="item-image">Cart1</td>
+                <td>Cart Item 1 <br> Short description for cart item 1</td>
+                <td><input class='quantity' type="text" value="2"></td>
+                <td class="cart-item-price">50.00</td>
+                <td>100.00 <br><input type="button" value="Remove"></td>
+            </tr>
+            <tr>
+                <td class="item-image">Cart2</td>
+                <td>Cart Item 2 <br> Short description for cart item 2</td>
+                <td><input class='quantity' type="text" value="2"></td>
+                <td class="cart-item-price">50.00</td>
+                <td>100.00 <br><input type="button" value="Remove"></td>
+            </tr>
+        </table>
+    </section>
+
+    <section id="checkout">
+        <div>
+        <h1>Promo Code</h1>
+        <p>Enter your promo code here</p>
+        <input type="text" name="" id="">
+        <input type="button" value="Redeem">
+        </div>
+        <div>
+            <strong>Total Php 200.00</strong>
+            <div>
+            <input type="button" value="Back to shop">
+            <input type="button" value="Checkout">
+            </div>
+        </div>
+    </section>
+    
+</body>
+</html>
