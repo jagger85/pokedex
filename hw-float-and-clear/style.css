@@ -1,0 +1,108 @@
+:root{
+    --hw-blue: rgb(0,179,255);
+}
+
+ #Our-Services .box p:after{
+    content: 'Waaiter!Pa-order naman ako ng Porkchop'
+    ' At tsaka ng dalawa ngang kanin Lagyan mo na nin ng konting ketchup Meron ba kayong chopsuey?'
+    ' twala rin pot Meron ba kayong Adobo? twala rin pot Meron ba kayong Bulalo?'
+    ' tubos na po meron bang kahii na ano? twala Wala?! Hoy!'
+    ' wala na bang ma-o Wala na bang ma-order, ma-order';
+} 
+
+body{
+    background-color: #EEE;
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
+}
+
+header{
+    background-color: var(--hw-blue);
+    color:white;
+}
+
+header h1{
+    display: inline-block;
+    position:absolute;
+}
+
+footer{
+    background-color: var(--hw-blue);
+    color: white;
+    text-align: center;
+    padding:1em;
+    position: absolute;
+    width: 100%;
+}
+
+footer a{
+    color: white;
+}
+
+section{
+    background-color: white; 
+    margin:15px auto;
+    padding: 1em;
+    border-radius: 10px;
+    width: 1060px;
+}
+
+.txt-blue{
+    color: var(--hw-blue);
+}
+
+.box{
+    background-color: #EEE;
+    border-radius: 10px;
+    display: inline-block;
+    width: 470px;  
+    margin-right: 1em;
+    margin-bottom: 1em; 
+    padding: 1em;
+    height: 200px;
+}
+
+.box-title-description-container{
+    width: 350px;
+    display: inline-block;
+}
+
+.logo-image{
+    margin: 15px;
+    width: 3em; 
+}
+.member-img{ 
+    width: 5em; 
+    height: auto; 
+}
+
+.service-img{
+    width: 5em;
+    margin: 1em;
+    float: left;
+
+}
+
+.portrait-container{
+    width: 5em;
+    height: 5em;
+    overflow: hidden;
+    border-radius: 50%;
+    float: left;
+    margin: 1em;
+}
+
+.member-role{
+    margin: 0;
+    font-weight: normal;
+}
+
+.member-name{
+    margin-bottom: 0;
+}
+.clear-fix::after{
+    content:"";
+    clear :both;
+    display:table;
+}
+
