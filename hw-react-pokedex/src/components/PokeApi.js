@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Pokemon from "./Pokemon";
+import { Box } from "@mui/material";
 
 export default class PokeApi extends Component {
   url = "https://pokeapi.co/api/v2/pokemon";
@@ -24,7 +25,7 @@ export default class PokeApi extends Component {
   }
   render() {
     return (
-      <ol>
+      <Box>
         {this.state.isLoading ? (
           <div>Is loading...</div>
         ) : (
@@ -32,7 +33,7 @@ export default class PokeApi extends Component {
             return <Pokemon key={i} name={e.name} />;
           })
         )}
-      </ol>
+      </Box>
     );
   }
 }
