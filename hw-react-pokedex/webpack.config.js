@@ -32,6 +32,14 @@ const HTMLWebpackPlugin = require ('html-webpack-plugin');
                       use: [
                         'style-loader', 'css-loader'
                       ]
+                    },
+                    {
+                      test: /\.(png|jpe?g|gif)$/i,
+                      use: [
+                        {
+                          loader: 'file-loader',
+                        },
+                      ],
                     }
                   ]
                 }

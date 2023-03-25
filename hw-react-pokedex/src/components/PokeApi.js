@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import Pokemon from "./Pokemon";
 
 export default class PokeApi extends Component {
+  url = "https://pokeapi.co/api/v2/pokemon";
   state = {
     pokeList: [],
     isLoading: true,
@@ -11,13 +12,11 @@ export default class PokeApi extends Component {
 
   componentDidMount() {
     try {
-      fetch("https://pokeapi.co/api/v2/pokemon")
+      fetch(this.url)
         .then((res) => res.json())
         .then((data) => {
-          this.setState({ pokeList: data });
+          this.state.pokeList = data.results
           this.setState({ isLoading: false });
-          console.log(this.state.isLoading);
-          console.log(this.state.pokeList);
         });
     } catch (error) {
       throw error;
@@ -26,12 +25,11 @@ export default class PokeApi extends Component {
   render() {
     return (
       <ol>
-      
         {this.state.isLoading ? (
           <div>Is loading...</div>
         ) : (
-          this.state.pokeList.results.map(( e, i) => {
-            return <Pokemon key={i} name={e.name} url={e.url} />
+          this.state.pokeList.map((e, i) => {
+            return <Pokemon key={i} name={e.name} />;
           })
         )}
       </ol>
