@@ -1,39 +1,70 @@
-import React, { Component } from "react";
+import React from "react";
+import { useState, useReducer, useEffect } from "react";
+import { Grid } from "@mui/material";
 import Pokemon from "./Pokemon";
-import { Box } from "@mui/material";
 
-export default class PokeApi extends Component {
-  url = "https://pokeapi.co/api/v2/pokemon";
-  state = {
-    pokeList: [],
-    isLoading: true,
-  };
+const pages = [];
+const url = "https://pokeapi.co/api/v2/pokemon?limit=100000&offset=0";
 
-  queries = {};
+function reducer(page, action) {
+  switch (action.type) {
+    case "increment":
+      return { count: page.count + 1 };
+    case "decrement":
+      return { count: page.count - 1 };
+    default:
+      throw new Error();
+  }
+}
 
-  componentDidMount() {
+function PokeApi() {
+  const [page, dispatch] = useReducer(reducer, { count: 0 });
+  const [isLoading, setLoading] = useState(true);
+
+  useEffect(() => {
     try {
-      fetch(this.url)
+      fetch(url)
         .then((res) => res.json())
         .then((data) => {
-          this.state.pokeList = data.results
-          this.setState({ isLoading: false });
+          for (let i = 0; i < data.results.length / 20; i++) {
+            pages[i] = data.results.slice(i * 20, i * 20 + 20);
+          }
+          setLoading(false);
         });
     } catch (error) {
       throw error;
     }
-  }
-  render() {
-    return (
-      <Box>
-        {this.state.isLoading ? (
-          <div>Is loading...</div>
-        ) : (
-          this.state.pokeList.map((e, i) => {
-            return <Pokemon key={i} name={e.name} />;
-          })
-        )}
-      </Box>
-    );
-  }
+  }, []);
+
+  return (
+    <Grid container>
+      <button
+        onClick={() => dispatch({ type: "decrement" })}
+        disabled={page.count == 0}
+      >
+        BACKWARD
+      </button>
+      <button
+        onClick={() => dispatch({ type: "increment" })}
+        disabled={page.count == pages.length -1}
+      >
+        FORWARD
+      </button>
+      {isLoading ? (
+        <div>Is loading...</div>
+      ) : (
+        (console.log(pages[page.count]),
+        pages[page.count].map((e, i) => (
+        
+          <Grid item>
+          {e.name}
+            <Pokemon key={i} name={e.name} />
+          </Grid>
+        )))
+      )}
+      Count: {page.count}
+    </Grid>
+  );
 }
+
+export default PokeApi;
