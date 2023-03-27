@@ -1,7 +1,17 @@
 import React from "react";
 import { useState, useReducer, useEffect } from "react";
-import { Grid } from "@mui/material";
+import { Grid, Button } from "@mui/material";
 import Pokemon from "./Pokemon";
+
+const styles = {
+  buttonRow : {
+    display : 'flex',
+    justifyContent : 'center'
+  },
+  button : {
+    margin : 5
+  }
+}
 
 const pages = [];
 const url = "https://pokeapi.co/api/v2/pokemon?limit=100000&offset=0";
@@ -38,31 +48,34 @@ function PokeApi() {
 
   return (
     <Grid container>
-      <button
+
+      {isLoading ? (
+        <div>Is loading...</div>
+      ) : (
+        pages[page.count].map((e, i) => (
+          <Grid item>
+            <Pokemon key={i} name={e.name} />
+          </Grid>
+        ))
+      )}
+      <Grid item xs={12} sx={styles.buttonRow}>
+      <Button
+        variant="contained"
+        sx={styles.button}
         onClick={() => dispatch({ type: "decrement" })}
         disabled={page.count == 0}
       >
         BACKWARD
-      </button>
-      <button
+      </Button>
+      <Button
+        variant="contained"
+        sx={styles.button}
         onClick={() => dispatch({ type: "increment" })}
-        disabled={page.count == pages.length -1}
+        disabled={page.count == pages.length - 1}
       >
         FORWARD
-      </button>
-      {isLoading ? (
-        <div>Is loading...</div>
-      ) : (
-        (console.log(pages[page.count]),
-        pages[page.count].map((e, i) => (
-        
-          <Grid item>
-          {e.name}
-            <Pokemon key={i} name={e.name} />
-          </Grid>
-        )))
-      )}
-      Count: {page.count}
+      </Button>
+      </Grid>
     </Grid>
   );
 }
