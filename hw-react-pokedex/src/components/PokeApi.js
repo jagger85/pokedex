@@ -4,14 +4,14 @@ import { Grid, Button } from "@mui/material";
 import Pokemon from "./Pokemon";
 
 const styles = {
-  buttonRow : {
-    display : 'flex',
-    justifyContent : 'center'
+  buttonRow: {
+    display: "flex",
+    justifyContent: "center",
   },
-  button : {
-    margin : 5
-  }
-}
+  button: {
+    margin: 5,
+  },
+};
 
 const pages = [];
 const url = "https://pokeapi.co/api/v2/pokemon?limit=100000&offset=0";
@@ -27,6 +27,11 @@ function reducer(page, action) {
   }
 }
 
+/**
+ * This object is responsible for fetching the whole pokemon list and slice them in groups of 20 
+ * It also has 2 buttons for going up/down the gallery
+ * @returns A pokemon gallery showing 20 pokemons 
+ */
 function PokeApi() {
   const [page, dispatch] = useReducer(reducer, { count: 0 });
   const [isLoading, setLoading] = useState(true);
@@ -37,7 +42,7 @@ function PokeApi() {
         .then((res) => res.json())
         .then((data) => {
           for (let i = 0; i < data.results.length / 20; i++) {
-            pages[i] = data.results.slice(i * 20, i * 20 + 20);
+            pages[i] = data.results.slice(i * 20, i * 20 + 20); /**  fits 20 pokemons in every position of the array pages */
           }
           setLoading(false);
         });
@@ -47,34 +52,33 @@ function PokeApi() {
   }, []);
 
   return (
-    <Grid container>
-
+    <Grid container >
       {isLoading ? (
         <div>Is loading...</div>
       ) : (
         pages[page.count].map((e, i) => (
           <Grid item>
-            <Pokemon key={i} name={e.name} />
+            <Pokemon key={i} name={e.name} /> {/** Send the pokemon name and the Pokemon component takes care of rendering*/}
           </Grid>
         ))
       )}
       <Grid item xs={12} sx={styles.buttonRow}>
-      <Button
-        variant="contained"
-        sx={styles.button}
-        onClick={() => dispatch({ type: "decrement" })}
-        disabled={page.count == 0}
-      >
-        BACKWARD
-      </Button>
-      <Button
-        variant="contained"
-        sx={styles.button}
-        onClick={() => dispatch({ type: "increment" })}
-        disabled={page.count == pages.length - 1}
-      >
-        FORWARD
-      </Button>
+        <Button
+          variant="contained"
+          sx={styles.button}
+          onClick={() => dispatch({ type: "decrement" })}
+          disabled={page.count == 0}
+        >
+          BACKWARD
+        </Button>
+        <Button
+          variant="contained"
+          sx={styles.button}
+          onClick={() => dispatch({ type: "increment" })}
+          disabled={page.count == pages.length - 1}
+        >
+          FORWARD
+        </Button>
       </Grid>
     </Grid>
   );

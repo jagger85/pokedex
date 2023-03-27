@@ -1,16 +1,6 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import {
-  Box,
-  Card,
-  CardHeader,
-  CardMedia,
-  CardContent,
-  FavoriteIcon,
-  Avatar,
-  Typography,
-  makeStyles,
-} from "@mui/material";
+import { Card, CardHeader, CardMedia } from "@mui/material";
 
 const styles = {
     card :  {       
@@ -27,11 +17,15 @@ const styles = {
     cardMedia :{
         width: 200,
         height: 200,
-        objectFit: "scale-down",
+        objectFit: "contain",
         margin: "auto auto",
     }
-
 }
+
+/**
+ * @param {string} props.name - Pokemon name
+ * @returns - A Pokemon card
+ */
 function Pokemon(props) {
   const [pokemon, setPokemon] = useState("");
   const [loading, setLoading] = useState(true);
@@ -43,7 +37,6 @@ function Pokemon(props) {
         .then((data) => {
           setPokemon(data);
           setLoading(false);
-          // console.log(data)
         });
     } catch (error) {
       throw error;
@@ -53,22 +46,17 @@ function Pokemon(props) {
   return loading ? (
     <div>Loading ... </div>
   ) : (
+
     <Card sx={styles.card}>
       <CardHeader
         sx={styles.cardReader}
-        avatar={
-          <Avatar
-          aria-label="Type"
-          >
-          </Avatar>
-        }
         title={`${pokemon.name}`}
         subheader={`${pokemon.types[0].type.name} ${pokemon.types[1]?.type.name ?? "" }`}
       />
       <CardMedia
         sx={styles.cardMedia}
         component="img"
-        image={`${pokemon.sprites.other.dream_world.front_default}`}
+        image={`${pokemon.sprites.front_default}`}
         alt={`${pokemon.name} image`}
       />
     </Card>
